@@ -1,0 +1,554 @@
+/* =========================================================
+   statuzfree
+   Home / social timeline
+   ========================================================= */
+
+
+/* ---------- Home view ---------- */
+
+.home-view {
+  width: 100%;
+  min-height: 100%;
+  background: var(--colour-background);
+}
+
+
+/* ---------- Feed header ---------- */
+
+.feed-header {
+  position: relative;
+
+  width: 100%;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(223, 255, 0, 0.025) 0%,
+      rgba(5, 5, 5, 0) 100%
+    );
+
+  border-bottom: 1px solid var(--colour-border);
+}
+
+.feed-header__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+
+  min-height: 76px;
+
+  padding:
+    var(--space-4)
+    18px
+    var(--space-3);
+}
+
+
+/* ---------- Home title ---------- */
+
+.feed-header__title-group {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  min-width: 0;
+}
+
+.feed-header__title {
+  margin: 0;
+
+  color: var(--colour-text);
+
+  font-size: 23px;
+  font-weight: 720;
+  line-height: 1;
+
+  letter-spacing: -0.7px;
+}
+
+
+/* ---------- Simulation day ---------- */
+
+.feed-header__status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 24px;
+
+  padding: 0 9px;
+
+  background: var(--colour-accent-muted);
+
+  border: 1px solid
+    rgba(223, 255, 0, 0.2);
+
+  border-radius: var(--radius-round);
+
+  color: var(--colour-accent);
+
+  font-size: 10px;
+  font-weight: 750;
+  line-height: 1;
+
+  letter-spacing: 1.1px;
+}
+
+
+/* =========================================================
+   Day progress
+   ========================================================= */
+
+.day-progress {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  flex: 0 0 auto;
+}
+
+.day-progress__label {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  color: var(--colour-text-muted);
+
+  font-size: 11px;
+  font-weight: 620;
+
+  font-variant-numeric: tabular-nums;
+}
+
+.day-progress__label span:first-child {
+  color: var(--colour-text-secondary);
+}
+
+
+/* ---------- Progress track ---------- */
+
+.day-progress__track {
+  position: relative;
+
+  width: 52px;
+  height: 3px;
+
+  overflow: hidden;
+
+  background: var(--colour-border-strong);
+
+  border-radius: var(--radius-round);
+}
+
+.day-progress__fill {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  min-width: 3px;
+
+  background: var(--colour-accent);
+
+  border-radius: inherit;
+
+  transition:
+    width 320ms ease;
+}
+
+
+/* =========================================================
+   Feed selector
+   ========================================================= */
+
+.feed-tabs {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  width: 100%;
+  height: 46px;
+}
+
+
+/* ---------- Tab ---------- */
+
+.feed-tabs__item {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  background: transparent;
+  border: 0;
+
+  color: var(--colour-text-muted);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.feed-tabs__item:hover {
+  background:
+    rgba(255, 255, 255, 0.015);
+
+  color: var(--colour-text-secondary);
+}
+
+.feed-tabs__item.is-active {
+  color: var(--colour-text);
+}
+
+
+/* ---------- Active tab line ---------- */
+
+.feed-tabs__item::after {
+  position: absolute;
+
+  right: 34%;
+  bottom: 0;
+  left: 34%;
+
+  height: 2px;
+
+  background: transparent;
+
+  border-radius:
+    var(--radius-round)
+    var(--radius-round)
+    0
+    0;
+
+  content: "";
+
+  transform: scaleX(0);
+
+  transition:
+    background var(--transition-standard),
+    transform var(--transition-standard);
+}
+
+.feed-tabs__item.is-active::after {
+  background: var(--colour-accent);
+
+  transform: scaleX(1);
+}
+
+
+/* =========================================================
+   Timeline
+   ========================================================= */
+
+.timeline {
+  position: relative;
+
+  width: 100%;
+
+  background: var(--colour-background);
+}
+
+
+/* ---------- Subtle timeline spine ---------- */
+
+/*
+ * The vertical line gives conversations a slight visual
+ * continuity without copying the presentation of Threads.
+ */
+
+.timeline .post-card::before {
+  position: absolute;
+
+  top: 62px;
+  bottom: -1px;
+  left: 39px;
+
+  width: 1px;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--colour-border) 0%,
+      rgba(36, 36, 36, 0.25) 100%
+    );
+
+  content: "";
+
+  pointer-events: none;
+}
+
+.timeline .post-card:last-child::before {
+  display: none;
+}
+
+
+/* =========================================================
+   Empty timeline
+   ========================================================= */
+
+.timeline-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  max-width: 390px;
+
+  margin: 0 auto;
+
+  padding:
+    90px
+    var(--space-6);
+
+  text-align: center;
+}
+
+.timeline-empty::before {
+  display: block;
+
+  width: 34px;
+  height: 3px;
+
+  margin-bottom: var(--space-5);
+
+  background: var(--colour-accent);
+
+  border-radius: var(--radius-round);
+
+  content: "";
+}
+
+.timeline-empty h2 {
+  margin: 0;
+
+  color: var(--colour-text);
+
+  font-size: 19px;
+  font-weight: 680;
+
+  letter-spacing: -0.4px;
+}
+
+.timeline-empty p {
+  margin:
+    var(--space-2)
+    0
+    0;
+
+  color: var(--colour-text-muted);
+
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   Feed loading state
+   ========================================================= */
+
+.timeline-loading {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+
+  padding:
+    var(--space-6)
+    var(--space-4);
+}
+
+.timeline-loading__indicator {
+  width: 22px;
+  height: 22px;
+
+  border:
+    2px solid
+    var(--colour-border-strong);
+
+  border-top-color:
+    var(--colour-accent);
+
+  border-radius: 50%;
+
+  animation:
+    timeline-loading-spin
+    700ms
+    linear
+    infinite;
+}
+
+@keyframes timeline-loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   Feed end
+   ========================================================= */
+
+.timeline-end {
+  padding:
+    var(--space-6)
+    var(--space-4)
+    calc(var(--space-7) + 8px);
+
+  color: var(--colour-text-muted);
+
+  font-size: 11px;
+  font-weight: 550;
+
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   Feed refresh state
+   ========================================================= */
+
+.feed-refresh {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 0;
+
+  overflow: hidden;
+
+  color: var(--colour-accent);
+
+  font-size: 11px;
+  font-weight: 650;
+
+  transition:
+    height var(--transition-standard);
+}
+
+.feed-refresh.is-visible {
+  height: 38px;
+}
+
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .feed-header__top {
+    min-height: 68px;
+
+    padding:
+      14px
+      14px
+      10px;
+  }
+
+  .feed-header__title {
+    font-size: 21px;
+  }
+
+  .feed-header__status {
+    min-height: 22px;
+
+    padding:
+      0
+      8px;
+
+    font-size: 9px;
+  }
+
+  .day-progress {
+    gap: 7px;
+  }
+
+  .day-progress__track {
+    width: 42px;
+  }
+
+  .feed-tabs {
+    height: 44px;
+  }
+
+  .timeline .post-card::before {
+    left: 33px;
+  }
+}
+
+
+/* =========================================================
+   Very small phones
+   ========================================================= */
+
+@media (max-width: 360px) {
+  .feed-header__top {
+    gap: 10px;
+
+    padding-right: 11px;
+    padding-left: 11px;
+  }
+
+  .feed-header__title-group {
+    gap: 7px;
+  }
+
+  .feed-header__title {
+    font-size: 20px;
+  }
+
+  .day-progress__label {
+    display: none;
+  }
+
+  .day-progress__track {
+    width: 38px;
+  }
+
+  .timeline .post-card::before {
+    left: 31px;
+  }
+}
+
+
+/* =========================================================
+   Desktop refinements
+   ========================================================= */
+
+@media (min-width: 900px) {
+  .feed-header__top {
+    padding-right: 22px;
+    padding-left: 22px;
+  }
+
+  .timeline .post-card::before {
+    left: 43px;
+  }
+}
+
+
+/* =========================================================
+   Reduced motion
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-loading__indicator {
+    animation-duration: 1.5s;
+  }
+
+  .day-progress__fill,
+  .feed-tabs__item::after {
+    transition: none;
+  }
+}
