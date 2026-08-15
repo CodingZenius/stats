@@ -1,0 +1,1004 @@
+/* =========================================================
+   statuzfree
+   Direct conversation view
+   ========================================================= */
+
+
+/* =========================================================
+   View
+   ========================================================= */
+
+.conversation-view {
+  display: grid;
+  grid-template-rows:
+    auto
+    minmax(0, 1fr)
+    auto;
+
+  width: 100%;
+  height:
+    calc(
+      100vh -
+      var(--header-height) -
+      var(--bottom-nav-height)
+    );
+
+  min-height: 520px;
+
+  background:
+    var(--colour-background);
+}
+
+
+/* =========================================================
+   Conversation header
+   ========================================================= */
+
+.conversation-header {
+  position: relative;
+  z-index: 5;
+
+  display: grid;
+  grid-template-columns:
+    42px
+    minmax(0, 1fr)
+    42px;
+
+  align-items: center;
+
+  min-height: 64px;
+
+  padding:
+    8px
+    12px;
+
+  background:
+    rgba(5, 5, 5, 0.94);
+
+  border-bottom:
+    1px solid
+    var(--colour-border);
+
+  backdrop-filter:
+    blur(16px);
+
+  -webkit-backdrop-filter:
+    blur(16px);
+}
+
+
+/* ---------- Back button ---------- */
+
+.conversation-header__back,
+.conversation-header__options {
+  display: grid;
+  place-items: center;
+
+  width: 38px;
+  height: 38px;
+
+  padding: 0;
+
+  background:
+    transparent;
+
+  border: 0;
+  border-radius: 50%;
+
+  color:
+    var(--colour-text-secondary);
+
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.conversation-header__back:hover,
+.conversation-header__options:hover {
+  background:
+    var(--colour-surface-raised);
+
+  color:
+    var(--colour-text);
+}
+
+.conversation-header__back:active,
+.conversation-header__options:active {
+  transform:
+    scale(0.92);
+}
+
+.conversation-header__back svg,
+.conversation-header__options svg {
+  width: 20px;
+  height: 20px;
+}
+
+.conversation-header__back svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.conversation-header__options svg {
+  fill: currentColor;
+}
+
+
+/* =========================================================
+   Conversation profile
+   ========================================================= */
+
+.conversation-header__profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  min-width: 0;
+
+  margin: 0;
+  padding: 4px 8px;
+
+  justify-self: start;
+
+  background:
+    transparent;
+
+  border: 0;
+  border-radius:
+    var(--radius-medium);
+
+  color: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast);
+}
+
+.conversation-header__profile:hover {
+  background:
+    rgba(255, 255, 255, 0.02);
+}
+
+
+/* ---------- Avatar ---------- */
+
+.conversation-header__avatar {
+  display: grid;
+  place-items: center;
+
+  width: 38px;
+  height: 38px;
+
+  overflow: hidden;
+
+  flex: 0 0 auto;
+
+  background:
+    var(--colour-surface-raised);
+
+  border:
+    1px solid
+    var(--colour-border-strong);
+
+  border-radius: 50%;
+
+  color:
+    var(--colour-text);
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.conversation-header__avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* ---------- Identity ---------- */
+
+.conversation-header__identity {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.conversation-header__name {
+  overflow: hidden;
+
+  color:
+    var(--colour-text);
+
+  font-size: 13.5px;
+  font-weight: 670;
+
+  letter-spacing: -0.2px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conversation-header__username {
+  overflow: hidden;
+
+  margin-top: 1px;
+
+  color:
+    var(--colour-text-muted);
+
+  font-size: 10.5px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   Timeline
+   ========================================================= */
+
+.conversation-timeline {
+  min-height: 0;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  padding:
+    18px
+    16px
+    24px;
+
+  scroll-behavior: smooth;
+
+  overscroll-behavior:
+    contain;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(223, 255, 0, 0.018),
+      transparent 260px
+    ),
+    var(--colour-background);
+}
+
+.conversation-timeline::-webkit-scrollbar {
+  width: 4px;
+}
+
+.conversation-timeline::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.conversation-timeline::-webkit-scrollbar-thumb {
+  background:
+    var(--colour-border-strong);
+
+  border-radius:
+    var(--radius-round);
+}
+
+
+/* =========================================================
+   Conversation introduction
+   ========================================================= */
+
+.conversation-introduction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-width: 360px;
+
+  margin:
+    20px
+    auto
+    40px;
+
+  padding:
+    0
+    20px;
+
+  text-align: center;
+}
+
+.conversation-introduction__avatar {
+  display: grid;
+  place-items: center;
+
+  width: 68px;
+  height: 68px;
+
+  overflow: hidden;
+
+  margin-bottom:
+    12px;
+
+  background:
+    var(--colour-surface-raised);
+
+  border:
+    1px solid
+    var(--colour-border-strong);
+
+  border-radius: 50%;
+
+  color:
+    var(--colour-text);
+
+  font-size: 21px;
+  font-weight: 720;
+}
+
+.conversation-introduction__avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.conversation-introduction strong {
+  color:
+    var(--colour-text);
+
+  font-size: 15px;
+  font-weight: 680;
+}
+
+.conversation-introduction > span {
+  margin-top: 2px;
+
+  color:
+    var(--colour-text-muted);
+
+  font-size: 11px;
+}
+
+.conversation-introduction p {
+  max-width: 310px;
+
+  margin:
+    10px
+    0
+    0;
+
+  color:
+    var(--colour-text-muted);
+
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   Messages
+   ========================================================= */
+
+.conversation-message {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  margin-top: 3px;
+}
+
+.conversation-message--separated {
+  margin-top: 14px;
+}
+
+
+/* ---------- Incoming ---------- */
+
+.conversation-message--incoming {
+  align-items:
+    flex-start;
+}
+
+
+/* ---------- Outgoing ---------- */
+
+.conversation-message--outgoing {
+  align-items:
+    flex-end;
+}
+
+
+/* =========================================================
+   Message bubble
+   ========================================================= */
+
+.conversation-message__bubble {
+  width: fit-content;
+  max-width: min(
+    76%,
+    440px
+  );
+
+  padding:
+    9px
+    12px;
+
+  border-radius:
+    17px;
+
+  transition:
+    opacity var(--transition-fast);
+}
+
+
+/* ---------- Incoming bubble ---------- */
+
+.conversation-message--incoming
+.conversation-message__bubble {
+  background:
+    var(--colour-surface-raised);
+
+  border:
+    1px solid
+    var(--colour-border);
+
+  border-bottom-left-radius:
+    5px;
+}
+
+
+/* ---------- Outgoing bubble ---------- */
+
+.conversation-message--outgoing
+.conversation-message__bubble {
+  background:
+    var(--colour-accent);
+
+  border:
+    1px solid
+    var(--colour-accent);
+
+  border-bottom-right-radius:
+    5px;
+
+  color:
+    var(--colour-black);
+}
+
+
+/* ---------- Consecutive bubbles ---------- */
+
+.conversation-message:not(
+  .conversation-message--separated
+).conversation-message--incoming
+.conversation-message__bubble {
+  border-top-left-radius:
+    8px;
+}
+
+.conversation-message:not(
+  .conversation-message--separated
+).conversation-message--outgoing
+.conversation-message__bubble {
+  border-top-right-radius:
+    8px;
+}
+
+
+/* =========================================================
+   Message content
+   ========================================================= */
+
+.conversation-message__content {
+  margin: 0;
+
+  color: inherit;
+
+  font-size: 13.5px;
+  font-weight: 410;
+  line-height: 1.45;
+
+  letter-spacing: -0.05px;
+
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.conversation-message--incoming
+.conversation-message__content {
+  color:
+    var(--colour-text);
+}
+
+
+/* =========================================================
+   Message time
+   ========================================================= */
+
+.conversation-message__time {
+  margin-top: 4px;
+
+  color:
+    var(--colour-text-muted);
+
+  font-size: 9px;
+  font-weight: 450;
+
+  font-variant-numeric:
+    tabular-nums;
+}
+
+.conversation-message--incoming
+.conversation-message__time {
+  margin-left: 4px;
+}
+
+.conversation-message--outgoing
+.conversation-message__time {
+  margin-right: 4px;
+}
+
+
+/* =========================================================
+   Pending state
+   ========================================================= */
+
+.conversation-message.is-pending
+.conversation-message__bubble {
+  opacity: 0.68;
+}
+
+.conversation-message.is-pending
+.conversation-message__time::after {
+  margin-left: 5px;
+
+  color:
+    var(--colour-text-muted);
+
+  content: "sending";
+}
+
+
+/* =========================================================
+   Message composer
+   ========================================================= */
+
+.message-composer {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+
+  padding:
+    10px
+    14px
+    calc(
+      10px +
+      env(safe-area-inset-bottom)
+    );
+
+  background:
+    rgba(5, 5, 5, 0.96);
+
+  border-top:
+    1px solid
+    var(--colour-border);
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+}
+
+
+/* ---------- Input wrapper ---------- */
+
+.message-composer__input-wrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+
+  width: 100%;
+
+  padding:
+    5px
+    5px
+    5px
+    14px;
+
+  background:
+    var(--colour-surface);
+
+  border:
+    1px solid
+    var(--colour-border-strong);
+
+  border-radius:
+    22px;
+
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.message-composer__input-wrapper:focus-within {
+  background:
+    var(--colour-surface-raised);
+
+  border-color:
+    rgba(223, 255, 0, 0.32);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(223, 255, 0, 0.04);
+}
+
+
+/* =========================================================
+   Message input
+   ========================================================= */
+
+.message-composer__input {
+  display: block;
+
+  width: 100%;
+  min-height: 32px;
+  max-height: 130px;
+
+  margin: 0;
+  padding:
+    6px
+    0;
+
+  resize: none;
+
+  overflow-y: auto;
+
+  background:
+    transparent;
+
+  border: 0;
+  outline: 0;
+
+  color:
+    var(--colour-text);
+
+  font-family:
+    var(--font-system);
+
+  font-size: 13.5px;
+  line-height: 1.45;
+
+  caret-color:
+    var(--colour-accent);
+}
+
+.message-composer__input::placeholder {
+  color:
+    var(--colour-text-muted);
+
+  opacity: 1;
+}
+
+.message-composer__input::-webkit-scrollbar {
+  width: 3px;
+}
+
+.message-composer__input::-webkit-scrollbar-thumb {
+  background:
+    var(--colour-border-strong);
+
+  border-radius:
+    var(--radius-round);
+}
+
+
+/* =========================================================
+   Send button
+   ========================================================= */
+
+.message-composer__send {
+  display: grid;
+  place-items: center;
+
+  width: 34px;
+  height: 34px;
+
+  padding: 0;
+
+  flex: 0 0 auto;
+
+  background:
+    var(--colour-accent);
+
+  border: 0;
+  border-radius: 50%;
+
+  color:
+    var(--colour-black);
+
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast),
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.message-composer__send:hover:not(:disabled) {
+  background:
+    var(--colour-accent-hover);
+}
+
+.message-composer__send:active:not(:disabled) {
+  transform:
+    scale(0.91);
+}
+
+.message-composer__send:disabled {
+  opacity: 0.2;
+
+  cursor: default;
+}
+
+.message-composer__send svg {
+  width: 17px;
+  height: 17px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* =========================================================
+   Missing conversation
+   ========================================================= */
+
+.conversation-missing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-height:
+    calc(
+      100vh -
+      var(--header-height) -
+      var(--bottom-nav-height)
+    );
+
+  padding:
+    110px
+    24px;
+
+  text-align: center;
+}
+
+.conversation-missing::before {
+  width: 36px;
+  height: 3px;
+
+  margin-bottom:
+    20px;
+
+  background:
+    var(--colour-accent);
+
+  border-radius:
+    var(--radius-round);
+
+  content: "";
+}
+
+.conversation-missing h1 {
+  margin: 0;
+
+  color:
+    var(--colour-text);
+
+  font-size: 19px;
+  font-weight: 680;
+
+  letter-spacing: -0.4px;
+}
+
+.conversation-missing p {
+  margin:
+    8px
+    0
+    20px;
+
+  color:
+    var(--colour-text-muted);
+
+  font-size: 12px;
+}
+
+.conversation-missing button {
+  min-height: 36px;
+
+  padding:
+    0
+    16px;
+
+  background:
+    var(--colour-accent);
+
+  border: 0;
+  border-radius:
+    var(--radius-round);
+
+  color:
+    var(--colour-black);
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   Focus states
+   ========================================================= */
+
+.conversation-header__back:focus-visible,
+.conversation-header__profile:focus-visible,
+.conversation-header__options:focus-visible,
+.message-composer__send:focus-visible,
+.conversation-missing button:focus-visible {
+  outline:
+    2px solid
+    var(--colour-accent);
+
+  outline-offset:
+    2px;
+}
+
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .conversation-view {
+    height:
+      calc(
+        100dvh -
+        var(--header-height) -
+        var(--bottom-nav-height)
+      );
+  }
+
+  .conversation-header {
+    grid-template-columns:
+      38px
+      minmax(0, 1fr)
+      38px;
+
+    min-height: 60px;
+
+    padding:
+      7px
+      10px;
+  }
+
+  .conversation-header__avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .conversation-header__profile {
+    gap: 8px;
+  }
+
+  .conversation-timeline {
+    padding:
+      15px
+      12px
+      20px;
+  }
+
+  .conversation-introduction {
+    margin:
+      18px
+      auto
+      34px;
+  }
+
+  .conversation-message__bubble {
+    max-width: 82%;
+
+    padding:
+      8px
+      11px;
+  }
+
+  .conversation-message__content {
+    font-size: 13px;
+  }
+
+  .message-composer {
+    padding:
+      8px
+      10px
+      calc(
+        8px +
+        env(safe-area-inset-bottom)
+      );
+  }
+}
+
+
+/* =========================================================
+   Very small phones
+   ========================================================= */
+
+@media (max-width: 360px) {
+  .conversation-header__username {
+    display: none;
+  }
+
+  .conversation-message__bubble {
+    max-width: 86%;
+  }
+
+  .conversation-introduction {
+    padding:
+      0
+      10px;
+  }
+}
+
+
+/* =========================================================
+   Desktop
+   ========================================================= */
+
+@media (min-width: 900px) {
+  .conversation-timeline {
+    padding-right: 22px;
+    padding-left: 22px;
+  }
+
+  .message-composer {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}
+
+
+/* =========================================================
+   Touch devices
+   ========================================================= */
+
+@media (hover: none) {
+  .conversation-header__back:hover,
+  .conversation-header__options:hover,
+  .conversation-header__profile:hover {
+    background: transparent;
+  }
+}
+
+
+/* =========================================================
+   Reduced motion
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .conversation-timeline {
+    scroll-behavior: auto;
+  }
+}
