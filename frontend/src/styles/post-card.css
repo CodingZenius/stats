@@ -1,0 +1,491 @@
+/* =========================================================
+   statuzfree
+   Post card / timeline component
+   ========================================================= */
+
+
+/* ---------- Post container ---------- */
+
+.post-card {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 12px;
+
+  width: 100%;
+
+  padding: 18px 18px 15px;
+
+  background: var(--colour-background);
+  border-bottom: 1px solid var(--colour-border);
+
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast);
+}
+
+.post-card:hover {
+  background: rgba(255, 255, 255, 0.012);
+}
+
+
+/* ---------- Avatar ---------- */
+
+.post-card__avatar {
+  position: relative;
+
+  display: grid;
+  place-items: center;
+
+  width: 44px;
+  height: 44px;
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+
+  background: var(--colour-surface-raised);
+  border: 1px solid var(--colour-border-strong);
+  border-radius: 50%;
+
+  color: var(--colour-text);
+
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+
+  user-select: none;
+}
+
+.post-card__avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.post-card__avatar span {
+  line-height: 1;
+}
+
+
+/* ---------- Anonymous avatar ---------- */
+
+.post-card__avatar--anonymous {
+  background:
+    linear-gradient(
+      145deg,
+      #181818,
+      #0b0b0b
+    );
+
+  border-color: #292929;
+}
+
+.post-card__avatar--anonymous::before {
+  width: 15px;
+  height: 15px;
+
+  background: #555555;
+  border-radius: 50%;
+
+  content: "";
+}
+
+.post-card__avatar--anonymous::after {
+  position: absolute;
+  bottom: 7px;
+
+  width: 24px;
+  height: 12px;
+
+  background: #555555;
+
+  border-radius:
+    14px 14px 7px 7px;
+
+  content: "";
+}
+
+
+/* ---------- Content column ---------- */
+
+.post-card__content {
+  min-width: 0;
+}
+
+
+/* ---------- Header ---------- */
+
+.post-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  min-width: 0;
+
+  margin-bottom: 5px;
+}
+
+.post-card__identity {
+  display: flex;
+  align-items: baseline;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+}
+
+.post-card__name {
+  overflow: hidden;
+
+  color: var(--colour-text);
+
+  font-size: 14.5px;
+  font-weight: 680;
+  letter-spacing: -0.25px;
+
+  text-overflow: ellipsis;
+}
+
+.post-card__username,
+.post-card__separator,
+.post-card__time {
+  flex-shrink: 0;
+
+  color: var(--colour-text-muted);
+
+  font-size: 13px;
+  font-weight: 430;
+}
+
+.post-card__username {
+  overflow: hidden;
+
+  margin-left: 6px;
+
+  text-overflow: ellipsis;
+}
+
+.post-card__separator {
+  margin: 0 5px;
+}
+
+
+/* ---------- Post menu ---------- */
+
+.post-card__menu {
+  display: grid;
+  place-items: center;
+
+  width: 30px;
+  height: 30px;
+
+  margin: -6px -5px 0 8px;
+  padding: 0;
+
+  flex: 0 0 auto;
+
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+
+  color: var(--colour-text-muted);
+
+  cursor: pointer;
+
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.post-card__menu:hover {
+  background: var(--colour-surface-raised);
+  color: var(--colour-text-secondary);
+}
+
+.post-card__menu:active {
+  background: var(--colour-surface-hover);
+}
+
+.post-card__menu svg {
+  width: 18px;
+  height: 18px;
+
+  fill: currentColor;
+  stroke: none;
+}
+
+
+/* ---------- Post text ---------- */
+
+.post-card__body {
+  margin: 0;
+
+  color: var(--colour-text);
+
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.48;
+
+  letter-spacing: -0.08px;
+
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+
+/* ---------- Media ---------- */
+
+.post-card__media {
+  display: grid;
+
+  width: 100%;
+
+  margin-top: 12px;
+
+  overflow: hidden;
+
+  background: var(--colour-black);
+  border: 1px solid var(--colour-border);
+  border-radius: var(--radius-medium);
+}
+
+.post-card__media--multiple {
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 2px;
+
+  background: var(--colour-border);
+}
+
+.post-card__media img,
+.post-card__media video {
+  display: block;
+
+  width: 100%;
+  max-height: 520px;
+
+  background: var(--colour-black);
+
+  object-fit: cover;
+}
+
+.post-card__media--multiple img,
+.post-card__media--multiple video {
+  height: 230px;
+}
+
+
+/* ---------- Actions ---------- */
+
+.post-card__actions {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  max-width: 390px;
+
+  margin-top: 13px;
+  margin-left: -8px;
+}
+
+
+/* ---------- Individual action ---------- */
+
+.post-card__action {
+  display: inline-flex;
+  align-items: center;
+
+  width: fit-content;
+  min-width: 44px;
+  height: 32px;
+
+  padding: 0 8px;
+
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-round);
+
+  color: var(--colour-text-muted);
+
+  cursor: pointer;
+
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.post-card__action:hover {
+  background: var(--colour-accent-muted);
+  color: var(--colour-accent);
+}
+
+.post-card__action:active {
+  transform: scale(0.92);
+}
+
+.post-card__action svg {
+  width: 19px;
+  height: 19px;
+
+  flex: 0 0 auto;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+/* ---------- Active interactions ---------- */
+
+.post-card__action.is-active {
+  color: var(--colour-accent);
+}
+
+.post-card__action.is-active[data-action="like"] svg {
+  fill: currentColor;
+}
+
+
+/* ---------- Engagement count ---------- */
+
+.post-card__action-count {
+  margin-left: 6px;
+
+  color: currentColor;
+
+  font-size: 12px;
+  font-weight: 520;
+
+  line-height: 1;
+
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ---------- Publication accounts ---------- */
+
+/*
+ * Publications remain visually recognisable without
+ * verification badges or decorative symbols.
+ *
+ * The distinction is deliberately subtle.
+ */
+
+.post-card:has(
+  .post-card__content
+) {
+  isolation: isolate;
+}
+
+
+/* ---------- Keyboard focus ---------- */
+
+.post-card__action:focus-visible,
+.post-card__menu:focus-visible {
+  outline: 2px solid var(--colour-accent);
+  outline-offset: 1px;
+}
+
+
+/* ---------- Touch devices ---------- */
+
+@media (hover: none) {
+  .post-card:hover {
+    background: var(--colour-background);
+  }
+
+  .post-card__action:hover {
+    background: transparent;
+    color: var(--colour-text-muted);
+  }
+
+  .post-card__action.is-active:hover {
+    color: var(--colour-accent);
+  }
+}
+
+
+/* ---------- Small mobile screens ---------- */
+
+@media (max-width: 480px) {
+  .post-card {
+    grid-template-columns:
+      40px minmax(0, 1fr);
+
+    gap: 10px;
+
+    padding:
+      16px 14px 13px;
+  }
+
+  .post-card__avatar {
+    width: 40px;
+    height: 40px;
+
+    font-size: 14px;
+  }
+
+  .post-card__name {
+    font-size: 14px;
+  }
+
+  .post-card__username,
+  .post-card__separator,
+  .post-card__time {
+    font-size: 12.5px;
+  }
+
+  .post-card__body {
+    font-size: 14.5px;
+    line-height: 1.47;
+  }
+
+  .post-card__actions {
+    width: 100%;
+    max-width: none;
+
+    margin-top: 11px;
+  }
+
+  .post-card__action {
+    min-width: 38px;
+
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+
+  .post-card__media--multiple img,
+  .post-card__media--multiple video {
+    height: 180px;
+  }
+}
+
+
+/* ---------- Very narrow screens ---------- */
+
+@media (max-width: 360px) {
+  .post-card {
+    padding-right: 11px;
+    padding-left: 11px;
+  }
+
+  .post-card__username {
+    max-width: 90px;
+  }
+
+  .post-card__action-count {
+    margin-left: 4px;
+
+    font-size: 11px;
+  }
+}
